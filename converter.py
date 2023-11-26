@@ -139,4 +139,3 @@ if __name__ == "__main__":
             Converter().get_word(10000, lang)
         except ValueError:
             print(lang)
-।
