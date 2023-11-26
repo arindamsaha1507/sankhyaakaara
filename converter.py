@@ -1,0 +1,99 @@
+"""Module for converting digits to words."""
+
+from enum import Enum
+from components import Components
+from sandhi import Sandhi
+
+
+class Style(Enum):
+    """Style of the number."""
+
+    UTTARA = 1
+    ADHIKA = 2
+
+
+class Converter:
+    """Class for converting digits to words."""
+
+    @staticmethod
+    def string_to_int(num: str) -> int:
+        """Convert string to integer."""
+        return int(num)
+
+    @staticmethod
+    def is_small(num: int) -> bool:
+        """Check if the number is small."""
+        return 0 <= num <= 99
+
+    @staticmethod
+    def get_large(num: int) -> str:
+        """Get large."""
+
+        string = str(num)
+        length = len(string)
+        if length < 3:
+            raise ValueError("The number is too small.")
+
+        check_string = string[1:]
+        if set(check_string) != {"0"}:
+            raise ValueError("Number is not a multiple of 100.")
+
+        base = Components().get_large(length - 1)
+
+        prefix = Components().get_two_digit(int(string[0]))
+
+        return f"{prefix}-{base}"
+
+    @staticmethod
+    def get_small(num: int) -> str:
+        """Get small."""
+        if not Converter.is_small(num):
+            raise ValueError("The number is too large.")
+
+        return Components().get_two_digit(num)
+
+    @staticmethod
+    def get_word(num: int, style: Style = Style.ADHIKA) -> str:
+        """Get word."""
+
+        if Converter.is_small(num):
+            return Converter.get_small(num)
+
+        small_part = num % 100
+        if small_part > 0:
+            string = Converter.get_small(small_part)
+        else:
+            string = ""
+
+        residue = num - small_part
+
+        parts = [int(str(x)) for x in str(residue)]
+
+        parts = parts[::-1]
+
+        for index, part in enumerate(parts):
+            if part == 0:
+                continue
+
+            large_part = part * 10**index
+            if string == "":
+                string = Converter.get_large(large_part)
+            else:
+                string = f"{string}+{Converter.get_large(large_part)}"
+
+        if style == Style.UTTARA:
+            string = string.replace("+", "-उत्तर-")
+        elif style == Style.ADHIKA:
+            string = string.replace("+", "-अधिक-")
+
+        string = Sandhi().sandhi(string)
+
+        return string
+
+
+if __name__ == "__main__":
+    print(Converter().get_large(10000))
+    print(Converter().get_small(54))
+    print(Converter().get_word(10054))
+    print(Converter().get_word(123456789))
+    print(Converter().get_word(123))
