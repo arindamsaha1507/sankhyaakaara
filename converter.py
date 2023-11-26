@@ -40,6 +40,9 @@ class Converter:
 
         base = Components().get_large(length - 1)
 
+        if string[0] == "1":
+            return base
+
         prefix = Components().get_two_digit(int(string[0]))
 
         return f"{prefix}-{base}"

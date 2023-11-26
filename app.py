@@ -39,8 +39,8 @@ def main():
             st.error("Please enter a valid number.")
             return
 
-        if query >= 1e17:
-            st.error("Number too large. Enter a number upto 1e^17.")
+        if query >= 1e18:
+            st.error("Number too large. Enter a number upto 10^18.")
             return
 
         converter = Converter()
