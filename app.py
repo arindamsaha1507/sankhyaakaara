@@ -44,7 +44,7 @@ def main():
             return
 
         converter = Converter()
-        st.write(f"### {converter.get_word(query)}")
+        st.write(f"### {converter.get_word(query, script='Devanagari')}")
 
 
 if __name__ == "__main__":
