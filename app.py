@@ -12,37 +12,11 @@ def main():
 
     st.write("This tool converts numbers to Sanskrit words.")
 
-    query = st.text_input("Please enter a number")
+    query = st.number_input(
+        "Enter a number", value=1, min_value=0, max_value=int(1e15), step=1
+    )
 
     if st.button("Convert"):
-        query = query.strip().replace(",", "")
-
-        if not query:
-            st.error("Please enter a number.")
-            return
-
-        if query[0] == "-":
-            st.error("Please enter a non-negative number.")
-            return
-
-        if not query.isnumeric():
-            st.error("Please enter a valid number.")
-            return
-
-        if "." in query:
-            st.error("Decimal points not allowed.")
-            return
-
-        try:
-            query = int(query)
-        except ValueError:
-            st.error("Please enter a valid number.")
-            return
-
-        if query >= 1e18:
-            st.error("Number too large. Enter a number upto 10^18.")
-            return
-
         converter = Converter()
         st.write(f"### {converter.get_word(query, script='Devanagari')}")
 
