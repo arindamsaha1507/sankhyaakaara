@@ -56,10 +56,26 @@ class Converter:
     def get_word(num: int, style: Style = Style.ADHIKA) -> str:
         """Get word."""
 
-        if Converter.is_small(num):
-            if num >= 20:
-                return Sandhi().sandhi(Converter.get_small(num))
+        if num == 0:
+            return "शून्यः / शून्या / शून्यम्"
+
+        if num == 1:
+            return "एकः / एका / एकम्"
+
+        if num == 2:
+            return "द्वौ / द्वे / द्वे"
+
+        if num == 3:
+            return "त्रयः / तिस्रः / त्रीणि"
+
+        if num == 4:
+            return "चत्वारः / चतस्रः / चत्वारि"
+
+        if num < 19:
             return Converter.get_small(num)
+
+        if Converter.is_small(num):
+            return Sandhi().sandhi(Converter.get_small(num))
 
         small_part = num % 100
         if small_part > 0:
