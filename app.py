@@ -12,14 +12,37 @@ def main():
 
     st.write("This tool converts numbers to Sanskrit words.")
 
-    query = st.number_input(
-        "Please enter a number",
-        value=0,
-        step=1,
-        min_value=0,
-    )
+    query = st.text_input("Please enter a number")
 
     if st.button("Convert"):
+        query = query.strip().replace(",", "")
+
+        if not query:
+            st.error("Please enter a number.")
+            return
+
+        if query[0] == "-":
+            st.error("Please enter a non-negative number.")
+            return
+
+        if not query.isnumeric():
+            st.error("Please enter a valid number.")
+            return
+
+        if "." in query:
+            st.error("Decimal points not allowed.")
+            return
+
+        try:
+            query = int(query)
+        except ValueError:
+            st.error("Please enter a valid number.")
+            return
+
+        if query >= 1e17:
+            st.error("Number too large. Enter a number upto 1e^17.")
+            return
+
         converter = Converter()
         st.write(f"### {converter.get_word(query)}")
 
