@@ -1,8 +1,10 @@
 """Module for converting digits to words."""
 
 from enum import Enum
+import requests
 from components import Components
 from sandhi import Sandhi
+from languages import LANGUAGES
 
 
 class Style(Enum):
@@ -14,6 +16,19 @@ class Style(Enum):
 
 class Converter:
     """Class for converting digits to words."""
+
+    @staticmethod
+    def change_script(string: str, language: str) -> str:
+        """Change script."""
+        url = f"https://aksharamukha-plugin.appspot.com/api/public?target={language}&text={string}"
+        response = requests.get(url, timeout=5)
+
+        response = response._content.decode("utf-8")  # pylint: disable=protected-access
+
+        if response == string and language != "Devanagari":
+            raise ValueError("Invalid script.")
+
+        return response
 
     @staticmethod
     def string_to_int(num: str) -> int:
@@ -56,7 +71,7 @@ class Converter:
         return Components().get_two_digit(num)
 
     @staticmethod
-    def get_word(num: int, style: Style = Style.ADHIKA) -> str:
+    def get_word(num: int, script: str, style: Style = Style.ADHIKA) -> str:
         """Get word."""
 
         if num == 0:
@@ -108,6 +123,7 @@ class Converter:
             string = string.replace("+", "-अधिक-")
 
         string = Sandhi().sandhi(string)
+        string = Converter.change_script(string, script)
 
         return string
 
@@ -115,6 +131,11 @@ class Converter:
 if __name__ == "__main__":
     print(Converter().get_large(10000))
     print(Converter().get_small(54))
-    print(Converter().get_word(10054))
-    print(Converter().get_word(123456789))
-    print(Converter().get_word(123))
+
+    for language in LANGUAGES:
+        # print(language)
+        # print()
+        try:
+            Converter().get_word(10000, language)
+        except ValueError:
+            print(language)
