@@ -49,8 +49,14 @@ class Sandhi:
                 vinyaasa[index - 1 : index + 2] = part
                 # print(vinyaasa)
 
+        if vinyaasa[-1] == "अ":
+            vinyaasa.append("म्")
+        elif vinyaasa[-1] in ["इ", "उ"]:
+            vinyaasa.append("ः")
+
         ret = vk.get_shabda(vinyaasa)
         ret = ret.replace(" ", "")
+
         return ret
 
 

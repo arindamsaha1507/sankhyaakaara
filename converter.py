@@ -57,6 +57,8 @@ class Converter:
         """Get word."""
 
         if Converter.is_small(num):
+            if num >= 20:
+                return Sandhi().sandhi(Converter.get_small(num))
             return Converter.get_small(num)
 
         small_part = num % 100
