@@ -1,2 +1,3 @@
 akshara==0.1.0
 streamlit==1.28.2
+aksharamukha==2.1.2
