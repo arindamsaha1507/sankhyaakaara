@@ -75,54 +75,56 @@ class Converter:
         """Get word."""
 
         if num == 0:
-            return "शून्यः । शून्या । शून्यम्"
+            string = "शून्यः । शून्या । शून्यम्"
 
-        if num == 1:
-            return "एकः । एका । एकम्"
+        elif num == 1:
+            string = "एकः । एका । एकम्"
 
-        if num == 2:
-            return "द्वौ । द्वे । द्वे"
+        elif num == 2:
+            string = "द्वौ । द्वे । द्वे"
 
-        if num == 3:
-            return "त्रयः । तिस्रः । त्रीणि"
+        elif num == 3:
+            string = "त्रयः । तिस्रः । त्रीणि"
 
-        if num == 4:
-            return "चत्वारः । चतस्रः । चत्वारि"
+        elif num == 4:
+            string = "चत्वारः । चतस्रः । चत्वारि"
 
-        if num < 19:
-            return Converter.get_small(num)
+        elif num < 19:
+            string = Converter.get_small(num)
 
-        if Converter.is_small(num):
-            return Sandhi().sandhi(Converter.get_small(num))
+        elif Converter.is_small(num):
+            string = Sandhi().sandhi(Converter.get_small(num))
 
-        small_part = num % 100
-        if small_part > 0:
-            string = Converter.get_small(small_part)
         else:
-            string = ""
-
-        residue = num - small_part
-
-        parts = [int(str(x)) for x in str(residue)]
-
-        parts = parts[::-1]
-
-        for index, part in enumerate(parts):
-            if part == 0:
-                continue
-
-            large_part = part * 10**index
-            if string == "":
-                string = Converter.get_large(large_part)
+            small_part = num % 100
+            if small_part > 0:
+                string = Converter.get_small(small_part)
             else:
-                string = f"{string}+{Converter.get_large(large_part)}"
+                string = ""
 
-        if style == Style.UTTARA:
-            string = string.replace("+", "-उत्तर-")
-        elif style == Style.ADHIKA:
-            string = string.replace("+", "-अधिक-")
+            residue = num - small_part
 
-        string = Sandhi().sandhi(string)
+            parts = [int(str(x)) for x in str(residue)]
+
+            parts = parts[::-1]
+
+            for index, part in enumerate(parts):
+                if part == 0:
+                    continue
+
+                large_part = part * 10**index
+                if string == "":
+                    string = Converter.get_large(large_part)
+                else:
+                    string = f"{string}+{Converter.get_large(large_part)}"
+
+            if style == Style.UTTARA:
+                string = string.replace("+", "-उत्तर-")
+            elif style == Style.ADHIKA:
+                string = string.replace("+", "-अधिक-")
+
+            string = Sandhi().sandhi(string)
+
         string = Converter.change_script(string, script)
 
         return string
