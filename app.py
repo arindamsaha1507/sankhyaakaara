@@ -6,20 +6,6 @@ from converter import Converter
 from languages import LANGUAGES
 
 
-def wide_button_style():
-    st.markdown(
-        """
-        <style>
-        .wide-button {
-            display: block;
-            width: 100%;
-        }
-        </style>
-    """,
-        unsafe_allow_html=True,
-    )
-
-
 def main():
     """The main function."""
 
@@ -44,8 +30,6 @@ def main():
 
     if button:
         converter = Converter()
-        print(script)
-        print(converter.get_word(query, script=script))
         st.write(f"### {converter.get_word(query, script=script)}")
 
 
