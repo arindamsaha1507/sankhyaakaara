@@ -18,8 +18,13 @@ Devanagari
 Dogra
 Grantha
 Gujarati
+Gurmukhi
 Hanunoo
 Hebrew
+HK
+IAST
+IPA
+ITRANS
 Javanese
 Kaithi
 Kannada
@@ -46,6 +51,7 @@ Oriya
 Pallava
 PhagsPa
 Rejang
+RomanColloquial
 Santali
 Saurashtra
 Shahmukhi
