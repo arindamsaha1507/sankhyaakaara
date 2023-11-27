@@ -2,6 +2,7 @@
 
 from enum import Enum
 import requests
+from aksharamukha import transliterate
 from components import Components
 from sandhi import Sandhi
 from languages import LANGUAGES
@@ -19,6 +20,14 @@ class Converter:
 
     @staticmethod
     def change_script(string: str, language: str) -> str:
+        """Change script."""
+
+        transliterated = transliterate.process("Devanagari", language, string)
+
+        return transliterated
+
+    @staticmethod
+    def change_script_aoi(string: str, language: str) -> str:
         """Change script."""
         url = f"https://aksharamukha-plugin.appspot.com/api/public?target={language}&text={string}"
         response = requests.get(url, timeout=5)
