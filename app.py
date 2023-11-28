@@ -1,36 +1,46 @@
 """The app module."""
 
 import streamlit as st
+import yaml
 
-from converter import Converter
+from converter import Converter, Style
 from languages import LANGUAGES
 
 
 def main():
     """The main function."""
 
-    st.title("Sanskrit numerical tool")
+    converter = Converter()
 
-    st.write("This tool converts numbers to Sanskrit words.")
+    with open("ui_text.yml", "r", encoding="utf-8") as stream:
+        settings = yaml.load(stream, Loader=yaml.FullLoader)
 
-    cols = st.columns(2)
+    language = "English"
 
-    with cols[0]:
-        query = st.number_input(
-            "Enter a number", value=1, min_value=0, max_value=int(1e15), step=1
-        )
+    language = st.sidebar.selectbox("Select Language (भाषां चिनोतु)", list(settings["title"].keys()))
 
-    with cols[1]:
-        script = st.selectbox("Select script", options=LANGUAGES, index=13)
+    st.title(settings["title"][language])
 
-    cols = st.columns(5)
+    st.write(settings["subtitle"][language])
 
-    with cols[2]:
-        button = st.button("Convert")
+    st.sidebar.title(settings["options"][language])
+
+    with st.sidebar:
+        st.write(f"### {settings['script'][language]}")
+        script = st.selectbox(settings["script_options"][language], options=LANGUAGES, index=13)
+
+        st.write(f"### {settings['joiner'][language]}")
+        joiner = st.selectbox(settings["joiner_options"][language], options=["अधिक", "उत्तर"], index=0)
+        style = Style.ADHIKA if joiner == "अधिक" else Style.UTTARA
+
+    query = st.number_input(
+        settings["instruction"][language], value=1, min_value=0, max_value=int(1e15), step=1
+    )
+
+    button = st.button(settings["button"][language])
 
     if button:
-        converter = Converter()
-        st.write(f"### {converter.get_word(query, script=script)}")
+        st.write(f"### {converter.get_word(query, script=script, style=style)}")
 
 
 if __name__ == "__main__":

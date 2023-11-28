@@ -1,0 +1,47 @@
+title:
+  English: Sanskrit numerical tool
+  संस्कृतम्: सङ्ख्याकारः
+
+subtitle:
+  English: A tool for converting numbers to Sanskrit words
+  संस्कृतम्: "॥ सङ्ख्याशब्दपरिवर्तकोऽयम् ॥"
+
+instruction:
+  English: Enter a number
+  संस्कृतम्: सङ्ख्यां लिखतु
+
+button:
+  English: Convert
+  संस्कृतम्: परिवर्तयतु
+
+language:
+  English: Select Language
+  संस्कृतम्: भाषां चिनोतु
+
+script:
+  English: Select Script
+  संस्कृतम्: लिपिं चिनोतु
+
+joiner:
+  English: Select a joining word
+  संस्कृतम्: योजकशब्दं चिनोतु
+
+options:
+  English: Options
+  संस्कृतम्: विकल्पाः
+
+script:
+  English: Script Options
+  संस्कृतम्: लिप्यन्तराणि
+
+script_options:
+  English: Select Script
+  संस्कृतम्: लिपिं चिनोतु
+
+joiner:
+  English: Joiner Options
+  संस्कृतम्: योजकशब्दाः
+
+joiner_options:
+  English: Select Joiner
+  संस्कृतम्: योजकशब्दं चिनोतु
