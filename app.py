@@ -17,24 +17,37 @@ def main():
 
     language = "English"
 
-    language = st.sidebar.selectbox("Select Language (भाषां चिनोतु)", list(settings["title"].keys()))
+    language = st.sidebar.selectbox(
+        "Select Language (भाषां चिनोतु)", list(settings["title"].keys())
+    )
 
     st.title(settings["title"][language])
 
     st.write(settings["subtitle"][language])
 
+    st.write(f"###### {settings['helper'][language]} ")
+
+
     st.sidebar.title(settings["options"][language])
 
     with st.sidebar:
         st.write(f"### {settings['script'][language]}")
-        script = st.selectbox(settings["script_options"][language], options=LANGUAGES, index=13)
+        script = st.selectbox(
+            settings["script_options"][language], options=LANGUAGES, index=13
+        )
 
         st.write(f"### {settings['joiner'][language]}")
-        joiner = st.selectbox(settings["joiner_options"][language], options=["अधिक", "उत्तर"], index=0)
+        joiner = st.selectbox(
+            settings["joiner_options"][language], options=["अधिक", "उत्तर"], index=0
+        )
         style = Style.ADHIKA if joiner == "अधिक" else Style.UTTARA
 
     query = st.number_input(
-        settings["instruction"][language], value=1, min_value=0, max_value=int(1e15), step=1
+        settings["instruction"][language],
+        value=1,
+        min_value=0,
+        max_value=int(1e15),
+        step=1,
     )
 
     button = st.button(settings["button"][language])
