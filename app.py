@@ -1,5 +1,6 @@
 """The app module."""
 
+import pyperclip
 import streamlit as st
 import yaml
 
@@ -59,6 +60,9 @@ def main():
 
     converter = Converter()
 
+    if "flag" not in st.session_state:
+        st.session_state["flag"] = False
+
     language = "English"
 
     language = st.sidebar.selectbox(
@@ -105,9 +109,17 @@ def main():
 
     button = st.button(writer("button", language, script))
 
-    if button:
+    if button or st.session_state["flag"]:
         st.write(f"### {converter.get_word(query, script=script, style=style)}")
-        print(script)
+        st.session_state["flag"] = True
+        st.session_state["answer"] = converter.get_word(
+            query, script=script, style=style
+        )
+
+        if st.button("Copy"):
+            st.write("Copied!")
+            print(st.session_state["answer"])
+            pyperclip.copy(st.session_state["answer"])
 
 
 if __name__ == "__main__":
