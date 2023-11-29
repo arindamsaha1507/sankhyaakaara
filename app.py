@@ -1,6 +1,5 @@
 """The app module."""
 
-import pyperclip
 import streamlit as st
 import yaml
 
@@ -115,11 +114,6 @@ def main():
         st.session_state["answer"] = converter.get_word(
             query, script=script, style=style
         )
-
-        if st.button("Copy"):
-            st.write("Copied!")
-            print(st.session_state["answer"])
-            pyperclip.copy(st.session_state["answer"])
 
 
 if __name__ == "__main__":
