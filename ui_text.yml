@@ -49,3 +49,15 @@ joiner_options:
 helper:
   English: For options, see the left sidebar. If it is hidden, click on the top left icon.
   संस्कृतम्: विकल्पानां कृते वामपार्श्वपट्टिकां पश्यतु । गुप्तास्ति चेदुपरि वामकोणे स्थितचिह्नं नुदतु ।
+
+range:
+  English: Valid range
+  संस्कृतम्: वैधपरिमाणम्
+
+error:
+  English: Please enter a valid number
+  संस्कृतम्: कृपया वैधसङ्ख्यां लिखतु
+
+input:
+  English: Do you want to enter large numbers?
+  संस्कृतम्: अतिवृहत्सङ्ख्यानि लिखितुमिच्छति वा?

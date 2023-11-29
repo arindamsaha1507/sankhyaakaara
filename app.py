@@ -7,6 +7,41 @@ from converter import Converter, Style
 from languages import LANGUAGES
 
 
+def base_input(
+    settings: dict, language: str, max_value: int, numeric: bool = True
+) -> int:
+    """Returns a numeric input widget."""
+
+    if numeric:
+        return int(
+            st.number_input(
+                settings["instruction"][language],
+                value=1,
+                min_value=0,
+                max_value=max_value,
+                step=1,
+            )
+        )
+
+    query = st.text_input(settings["instruction"][language])
+
+    if query != "":
+        try:
+            ret = int(query)
+
+            if ret < 0 or ret > max_value:
+                st.error(f"{settings['range'][language]} 0 - {max_value}.")
+                return 0
+
+            return ret
+
+        except ValueError:
+            st.error(settings["error"][language])
+            return 0
+
+    return 0
+
+
 def main():
     """The main function."""
 
@@ -27,7 +62,6 @@ def main():
 
     st.write(f"###### {settings['helper'][language]} ")
 
-
     st.sidebar.title(settings["options"][language])
 
     with st.sidebar:
@@ -42,13 +76,19 @@ def main():
         )
         style = Style.ADHIKA if joiner == "अधिक" else Style.UTTARA
 
-    query = st.number_input(
-        settings["instruction"][language],
-        value=1,
-        min_value=0,
-        max_value=int(1e15),
-        step=1,
-    )
+        st.text("")
+
+        input_instructions = settings["input"][language]
+        large_number = st.checkbox(input_instructions)
+
+        if large_number:
+            numeric = False
+            max_value = int(2e17)
+        else:
+            numeric = True
+            max_value = int(1e15)
+
+    query = base_input(settings, language, max_value=max_value, numeric=numeric)
 
     button = st.button(settings["button"][language])
 
