@@ -1,63 +1,71 @@
 title:
   English: Sanskrit numerical tool
-  संस्कृतम्: सङ्ख्याकारः
+  Samskritam: सङ्ख्याकारः
 
 subtitle:
   English: A tool for converting numbers to Sanskrit words
-  संस्कृतम्: "॥ सङ्ख्याशब्दपरिवर्तकोऽयम् ॥"
+  Samskritam: "॥ सङ्ख्याशब्दपरिवर्तकोऽयम् ॥"
 
 instruction:
   English: Enter a number
-  संस्कृतम्: सङ्ख्यां लिखतु
+  Samskritam: सङ्ख्यां लिखतु
 
 button:
   English: Convert
-  संस्कृतम्: परिवर्तयतु
+  Samskritam: परिवर्तयतु
 
 language:
   English: Select Language
-  संस्कृतम्: भाषां चिनोतु
+  Samskritam: भाषां चिनोतु
 
 script:
   English: Select Script
-  संस्कृतम्: लिपिं चिनोतु
+  Samskritam: लिपिं चिनोतु
 
 joiner:
   English: Select a joining word
-  संस्कृतम्: योजकशब्दं चिनोतु
+  Samskritam: योजकशब्दं चिनोतु
 
 options:
   English: Options
-  संस्कृतम्: विकल्पाः
+  Samskritam: विकल्पाः
 
 script:
   English: Script Options
-  संस्कृतम्: लिप्यन्तराणि
+  Samskritam: लिप्यन्तराणि
 
 script_options:
   English: Select Script
-  संस्कृतम्: लिपिं चिनोतु
+  Samskritam: लिपिं चिनोतु
 
 joiner:
   English: Joiner Options
-  संस्कृतम्: योजकशब्दाः
+  Samskritam: योजकशब्दाः
+
+joiner_uttara:
+  English: uttara
+  Samskritam: उत्तर
+
+joiner_adhika:
+  English: adhika
+  Samskritam: अधिक
 
 joiner_options:
   English: Select Joiner
-  संस्कृतम्: योजकशब्दं चिनोतु
+  Samskritam: योजकशब्दं चिनोतु
 
 helper:
   English: For options, see the left sidebar. If it is hidden, click on the top left icon.
-  संस्कृतम्: विकल्पानां कृते वामपार्श्वपट्टिकां पश्यतु । गुप्तास्ति चेदुपरि वामकोणे स्थितचिह्नं नुदतु ।
+  Samskritam: विकल्पानां कृते वामपार्श्वपट्टिकां पश्यतु । गुप्तास्ति चेदुपरि वामकोणे स्थितचिह्नं नुदतु ।
 
 range:
   English: Valid range
-  संस्कृतम्: वैधपरिमाणम्
+  Samskritam: वैधपरिमाणम्
 
 error:
   English: Please enter a valid number
-  संस्कृतम्: कृपया वैधसङ्ख्यां लिखतु
+  Samskritam: कृपया वैधसङ्ख्यां लिखतु
 
 input:
   English: Do you want to enter large numbers?
-  संस्कृतम्: अतिवृहत्सङ्ख्यानि लिखितुमिच्छति वा?
+  Samskritam: अतिवृहत्सङ्ख्यानि लिखितुमिच्छति वा?

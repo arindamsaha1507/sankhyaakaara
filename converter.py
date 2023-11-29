@@ -19,10 +19,22 @@ class Converter:
     """Class for converting digits to words."""
 
     @staticmethod
+    def contains_english_alphabet(string: str):
+        """Check if the string contains English alphabet."""
+
+        return any(
+            char in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            for char in string
+        )
+
+    @staticmethod
     def change_script(string: str, language: str) -> str:
         """Change script."""
 
-        transliterated = transliterate.process("Devanagari", language, string)
+        if Converter.contains_english_alphabet(string):
+            transliterated = string
+        else:
+            transliterated = transliterate.process("Devanagari", language, string)
 
         return transliterated
 

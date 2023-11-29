@@ -7,15 +7,13 @@ from converter import Converter, Style
 from languages import LANGUAGES
 
 
-def base_input(
-    settings: dict, language: str, max_value: int, numeric: bool = True
-) -> int:
+def base_input(language: str, script: str, max_value: int, numeric: bool = True) -> int:
     """Returns a numeric input widget."""
 
     if numeric:
         return int(
             st.number_input(
-                settings["instruction"][language],
+                writer("instruction", language, script),
                 value=1,
                 min_value=0,
                 max_value=max_value,
@@ -23,23 +21,37 @@ def base_input(
             )
         )
 
-    query = st.text_input(settings["instruction"][language])
+    query = st.text_input(writer("instruction", language, script))
 
     if query != "":
         try:
             ret = int(query)
 
             if ret < 0 or ret > max_value:
-                st.error(f"{settings['range'][language]} 0 - {max_value}.")
+                st.error(f"{writer('range', language, script)} 0 - {max_value}.")
                 return 0
 
             return ret
 
         except ValueError:
-            st.error(settings["error"][language])
+            st.error(writer("error", language, script))
             return 0
 
     return 0
+
+
+def writer(content: str, language: str, script: str) -> str:
+    """Returns the content in the specified script."""
+
+    with open("ui_text.yml", "r", encoding="utf-8") as stream:
+        settings = yaml.load(stream, Loader=yaml.FullLoader)
+
+    content = settings[content][language]
+
+    if script == "Devanagari":
+        return content
+
+    return Converter().change_script(content, script)
 
 
 def main():
@@ -47,38 +59,33 @@ def main():
 
     converter = Converter()
 
-    with open("ui_text.yml", "r", encoding="utf-8") as stream:
-        settings = yaml.load(stream, Loader=yaml.FullLoader)
-
     language = "English"
 
     language = st.sidebar.selectbox(
-        "Select Language (भाषां चिनोतु)", list(settings["title"].keys())
+        "Select Language (भाषां चिनोतु)", ["English", "Samskritam"]
     )
 
-    st.title(settings["title"][language])
-
-    st.write(settings["subtitle"][language])
-
-    st.write(f"###### {settings['helper'][language]} ")
-
-    st.sidebar.title(settings["options"][language])
+    script = st.sidebar.selectbox(
+        "Select Script (लिपिं चिनोतु)", options=LANGUAGES, index=13
+    )
 
     with st.sidebar:
-        st.write(f"### {settings['script'][language]}")
-        script = st.selectbox(
-            settings["script_options"][language], options=LANGUAGES, index=13
-        )
+        st.title(writer("options", language, script))
 
-        st.write(f"### {settings['joiner'][language]}")
+        st.write(f"### {writer('joiner', language, script)}")
         joiner = st.selectbox(
-            settings["joiner_options"][language], options=["अधिक", "उत्तर"], index=0
+            writer("joiner_options", language, script),
+            options=[
+                writer("joiner_adhika", language, script),
+                writer("joiner_uttara", language, script),
+            ],
+            index=0,
         )
         style = Style.ADHIKA if joiner == "अधिक" else Style.UTTARA
 
         st.text("")
 
-        input_instructions = settings["input"][language]
+        input_instructions = writer("input", language, script)
         large_number = st.checkbox(input_instructions)
 
         if large_number:
@@ -88,12 +95,19 @@ def main():
             numeric = True
             max_value = int(1e15)
 
-    query = base_input(settings, language, max_value=max_value, numeric=numeric)
+    st.title(writer("title", language, script))
 
-    button = st.button(settings["button"][language])
+    st.write(writer("subtitle", language, script))
+
+    st.write(f"###### {writer('helper', language, script)} ")
+
+    query = base_input(language, script, max_value=max_value, numeric=numeric)
+
+    button = st.button(writer("button", language, script))
 
     if button:
         st.write(f"### {converter.get_word(query, script=script, style=style)}")
+        print(script)
 
 
 if __name__ == "__main__":
