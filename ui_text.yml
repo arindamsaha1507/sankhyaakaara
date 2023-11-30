@@ -8,23 +8,23 @@ subtitle:
 
 instruction:
   English: Enter a number
-  Samskritam: सङ्ख्यां लिखतु
+  Samskritam: सङ्ख्यां लिख।
 
 button:
   English: Convert
-  Samskritam: परिवर्तयतु
+  Samskritam: ॥परिवर्तय॥
 
 language:
   English: Select Language
-  Samskritam: भाषां चिनोतु
+  Samskritam: भाषां चिनु।
 
 script:
   English: Select Script
-  Samskritam: लिपिं चिनोतु
+  Samskritam: लिपिं चिनु।
 
 joiner:
   English: Select a joining word
-  Samskritam: योजकशब्दं चिनोतु
+  Samskritam: योजकशब्दं चिनु।
 
 options:
   English: Options
@@ -36,7 +36,7 @@ script:
 
 script_options:
   English: Select Script
-  Samskritam: लिपिं चिनोतु
+  Samskritam: लिपिं चिनु।
 
 joiner:
   English: Joiner Options
@@ -52,11 +52,11 @@ joiner_adhika:
 
 joiner_options:
   English: Select Joiner
-  Samskritam: योजकशब्दं चिनोतु
+  Samskritam: योजकशब्दं चिनु।
 
 helper:
   English: For options, see the left sidebar. If it is hidden, click on the top left icon.
-  Samskritam: विकल्पानां कृते वामपार्श्वपट्टिकां पश्यतु । गुप्तास्ति चेदुपरि वामकोणे स्थितचिह्नं नुदतु ।
+  Samskritam: विकल्पान् वामपार्श्वपट्टिकायां पश्य। यदि गुप्ता तर्हि वामकोणे उपरिस्थं चिह्नं नुद।
 
 range:
   English: Valid range
@@ -64,8 +64,8 @@ range:
 
 error:
   English: Please enter a valid number
-  Samskritam: कृपया वैधसङ्ख्यां लिखतु
+  Samskritam: कृपया वैधसङ्ख्यां लिख।
 
 input:
   English: Do you want to enter large numbers?
-  Samskritam: अतिवृहत्सङ्ख्यानि लिखितुमिच्छति वा?
+  Samskritam: अपि अतिवृहत्सङ्ख्याः लिखितुम् इष्यते।
