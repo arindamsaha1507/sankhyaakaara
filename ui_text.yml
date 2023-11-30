@@ -69,3 +69,11 @@ error:
 input:
   English: Do you want to enter large numbers?
   Samskritam: अपि अतिवृहत्सङ्ख्याः लिखितुम् इष्यते।
+
+copy:
+  English: Copy
+  Samskritam: प्रतिलिपिं कुरु
+
+copied:
+  English: Copied!
+  Samskritam: प्रतिलिपिः अंशफलके स्थापितम्

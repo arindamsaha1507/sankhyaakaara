@@ -1,5 +1,6 @@
 """The app module."""
 
+import clipboard
 import streamlit as st
 import yaml
 
@@ -114,6 +115,12 @@ def main():
         st.session_state["answer"] = converter.get_word(
             query, script=script, style=style
         )
+
+    if "answer" in st.session_state:
+        copy = st.button(writer("copy", language, script))
+        if copy:
+            clipboard.copy(st.session_state["answer"])
+            st.success(writer("copied", language, script))
 
 
 if __name__ == "__main__":
