@@ -1,5 +1,7 @@
 """The app module."""
 
+import subprocess
+
 import clipboard
 import streamlit as st
 import yaml
@@ -119,6 +121,7 @@ def main():
     if "answer" in st.session_state:
         copy = st.button(writer("copy", language, script))
         if copy:
+            subprocess.run("xclip &")  # pylint: disable=subprocess-run-check
             clipboard.copy(st.session_state["answer"])
             st.success(writer("copied", language, script))
 
