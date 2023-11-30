@@ -121,7 +121,7 @@ def main():
     if "answer" in st.session_state:
         copy = st.button(writer("copy", language, script))
         if copy:
-            subprocess.run("xclip &")  # pylint: disable=subprocess-run-check
+            subprocess.run("which xclip")  # pylint: disable=subprocess-run-check
             clipboard.copy(st.session_state["answer"])
             st.success(writer("copied", language, script))
 
