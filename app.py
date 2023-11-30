@@ -65,11 +65,11 @@ def main():
     language = "English"
 
     language = st.sidebar.selectbox(
-        "Select Language (भाषां चिनोतु)", ["English", "Samskritam"]
+        "Select Language (भाषां चिनु)", ["English", "Samskritam"]
     )
 
     script = st.sidebar.selectbox(
-        "Select Script (लिपिं चिनोतु)", options=LANGUAGES, index=13
+        "Select Script (लिपिं चिनु)", options=LANGUAGES, index=13
     )
 
     with st.sidebar:
