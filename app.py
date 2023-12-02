@@ -87,7 +87,12 @@ def main():
             ],
             index=0,
         )
-        style = Style.ADHIKA if joiner == "अधिक" else Style.UTTARA
+
+        style = (
+            Style.ADHIKA
+            if converter.change_script(joiner, "Devanagari") in ["अधिक", "adhika"]
+            else Style.UTTARA
+        )
 
         st.text("")
 

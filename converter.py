@@ -34,7 +34,7 @@ class Converter:
         if Converter.contains_english_alphabet(string):
             transliterated = string
         else:
-            transliterated = transliterate.process("Devanagari", language, string)
+            transliterated = transliterate.process("autodetect", language, string)
 
         return transliterated
 
