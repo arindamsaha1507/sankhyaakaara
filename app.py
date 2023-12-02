@@ -1,6 +1,5 @@
 """The app module."""
 
-import clipboard
 import streamlit as st
 import yaml
 
@@ -57,6 +56,8 @@ def writer(content: str, language: str, script: str) -> str:
 
 def main():
     """The main function."""
+
+    st.set_page_config(layout="wide")
 
     converter = Converter()
 
