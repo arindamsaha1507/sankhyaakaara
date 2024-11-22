@@ -137,6 +137,7 @@ def main():
     st.write(f"###### {writer('helper', language, script)} ")
 
     query = base_input(language, script, max_value=max_value, numeric=numeric)
+    logger.info("Input number received: %s", query)  # Log the query input
 
     button = st.button(writer("button", language, script))
 
