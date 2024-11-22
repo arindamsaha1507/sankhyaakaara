@@ -1,46 +1,75 @@
 """Module for API."""
 
-from fastapi import FastAPI
+from enum import Enum
 
-from languages import LANGUAGES
+from fastapi import FastAPI, HTTPException, Query
+from pydantic import BaseModel
+
+from languages import LANGUAGES, LanguageEnum
 from converter import Converter, Style
 
 app = FastAPI()
 
 
-@app.get("/script/{script}/style/{style}/number/{number}")
-async def api_converter(script: str, style: str, number: int):
+# Enum for Styles
+class StyleEnum(str, Enum):
+    """Enum for supported styles."""
+
+    UTTARA = "Uttara"
+    ADHIKA = "Adhika"
+
+
+# Response Model
+class ConverterResponse(BaseModel):
+    """Response model for the converter API."""
+
+    result: str
+    status: str
+    number: int
+    script: str
+    style: str
+
+
+@app.get(
+    "/convert",
+    response_model=ConverterResponse,
+    summary="Convert number to Sanskrit word",
+    description="API for converting a number to a Sanskrit word in the specified script and style.",
+)
+async def api_converter(
+    number: int = Query(..., ge=0, description="A positive integer to convert."),
+    script: LanguageEnum = Query(
+        LanguageEnum.DEVANAGARI, description="The script for conversion."
+    ),
+    style: StyleEnum = Query(StyleEnum.UTTARA, description="The style for conversion."),
+):
     """API for Sanskrit Number Converter."""
 
-    if not script:
-        script = "DEVANAGARI"
+    script = script.capitalize()
 
-    if not style:
-        style = "UTTARA"
-
+    # Validate script
     if script not in LANGUAGES:
-        result = "Script not supported."
-        status = "error"
-    elif not isinstance(number, int):
-        result = "Number must be an integer."
-        status = "error"
-    elif number < 0:
-        result = "Number must be positive."
-        status = "error"
-    elif style not in ["UTTARA", "ADHIKA"]:
-        result = "Style must be either UTTARA or ADHIKA."
-        status = "error"
-    else:
-        style = Style.ADHIKA if style == "ADHIKA" else Style.UTTARA
-        result = Converter().get_word(number, script=script, style=style)
-        status = "success"
+        raise HTTPException(
+            status_code=400,
+            detail=f"Script not supported. Supported scripts: {LANGUAGES}",
+        )
 
-    return {
-        "result": result,
-        "status": status,
-        "scripts": LANGUAGES,
-        "styles": [Style.ADHIKA.name, Style.UTTARA.name],
-        "number": number,
-        "script": script,
-        "style": style.name,
-    }
+    # Convert style to the appropriate enum
+    style_enum = Style.ADHIKA if style == StyleEnum.ADHIKA else Style.UTTARA
+
+    # Perform conversion
+    try:
+        result = Converter().get_word(number, script=script, style=style_enum)
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Conversion error: {str(e)}"
+        ) from e
+
+    # Return response
+    return ConverterResponse(
+        result=result,
+        status="success",
+        number=number,
+        script=script,
+        style=style_enum.name,
+    )
