@@ -7,14 +7,21 @@ from converter import Converter, Style
 
 app = FastAPI()
 
+
 @app.get("/script/{script}/style/{style}/number/{number}")
 async def api_converter(script: str, style: str, number: int):
     """API for Sanskrit Number Converter."""
 
+    if not script:
+        script = "DEVANAGARI"
+
+    if not style:
+        style = "UTTARA"
+
     if script not in LANGUAGES:
         result = "Script not supported."
         status = "error"
-    elif type(number) != int:
+    elif not isinstance(number, int):
         result = "Number must be an integer."
         status = "error"
     elif number < 0:
@@ -28,6 +35,12 @@ async def api_converter(script: str, style: str, number: int):
         result = Converter().get_word(number, script=script, style=style)
         status = "success"
 
-
-    return {"result": result, "status": status, "scripts": LANGUAGES, "styles": [Style.ADHIKA.name, Style.UTTARA.name], "number": number, "script": script, "style": style.name}
-
+    return {
+        "result": result,
+        "status": status,
+        "scripts": LANGUAGES,
+        "styles": [Style.ADHIKA.name, Style.UTTARA.name],
+        "number": number,
+        "script": script,
+        "style": style.name,
+    }
