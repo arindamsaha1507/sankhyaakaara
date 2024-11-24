@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sankhyaakaara"
+version = "0.1.0"
+description = "A package for Sanskrit numeral processing and sandhi."
+readme = "README.md"
+license = {text = "GPL-3.0"}
+authors = [
+    {name = "Arindam Saha", email = "arindamsaha1507@gmail.com"}
+]
+requires-python = ">=3.8"
+keywords = ["sanskrit", "numerals", "sandhi", "language"]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+dependencies = [
+    "akshara>=1.1.0",
+    "akshara-mukha>=0.1.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "flake8",
+    "twine"
+]
+
+[tool.setuptools.package-data]
+sankhyaakaara = ["data/*.csv"]
