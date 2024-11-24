@@ -3,9 +3,10 @@
 from enum import Enum
 import requests
 from aksharamukha import transliterate
-from components import Components
-from sandhi import Sandhi
-from languages import LANGUAGES
+
+from .components import Components
+from .sandhi import Sandhi
+from .languages import LANGUAGES
 
 
 class Style(Enum):
@@ -149,6 +150,42 @@ class Converter:
         string = Converter.change_script(string, script)
 
         return string
+
+
+def convert(
+    num: int,
+    script: str = "Devanagari",
+    style: str = "Uttara",
+) -> str:
+    """
+    Convert a number to a word.
+
+    Parameters
+    ----------
+    num : int
+        The number to convert.
+    script : str, optional
+        The script to convert to, by default "Devanagari".
+        Popular scripts include: "Devanagari", "IAST", "ITRANS", "ISO15919", "HK", "SLP1".
+    style : str, optional
+        The joiner word style, by default "Uttara".
+        Available styles include: "Uttara", "Adhika".
+
+    Returns
+    -------
+    str
+        The word representation of the number in the specified script and style.
+    """
+
+    style = style.upper()
+
+    if style not in Style.__members__:
+        raise ValueError("Invalid style.")
+
+    if script not in LANGUAGES:
+        raise ValueError("Invalid script.")
+
+    return Converter().get_word(num, script, Style[style])
 
 
 if __name__ == "__main__":

@@ -1,6 +1,8 @@
 """Module for doing sandhi."""
 
 import os
+import importlib.resources as pkg_resources
+
 from dataclasses import dataclass, field
 from akshara import varnakaarya as vk
 
@@ -9,12 +11,14 @@ from akshara import varnakaarya as vk
 class Sandhi:
     """Class for doing sandhi."""
 
-    source: os.PathLike = "data/sandhi.csv"
+    source: os.PathLike = "sandhi.csv"
     rules: dict[str, list[str]] = field(init=False)
 
     def __post_init__(self):
         data = {}
-        with open(self.source, "r", encoding="utf-8") as f:
+        # with open(self.source, "r", encoding="utf-8") as f:
+
+        with pkg_resources.open_text(__package__ + ".data", self.source) as f:
             for line in f:
                 left, right, result = line.strip().split(",")
 

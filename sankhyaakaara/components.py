@@ -1,6 +1,7 @@
 """Module for components of the number."""
 
 import os
+import importlib.resources as pkg_resources
 from dataclasses import dataclass, field
 
 
@@ -8,8 +9,8 @@ from dataclasses import dataclass, field
 class Components:
     """Class for components of the number."""
 
-    source_two_digit: os.PathLike = "data/two_digit.csv"
-    source_large: os.PathLike = "data/large.csv"
+    source_two_digit: os.PathLike = "two_digit.csv"
+    source_large: os.PathLike = "large.csv"
 
     two_digit: dict[int, str] = field(default_factory=dict, init=False)
     large: dict[int, str] = field(default_factory=dict, init=False)
@@ -22,7 +23,8 @@ class Components:
     def _load_data(self, source: os.PathLike) -> dict[int, str]:
         """Load data from csv file."""
         data = {}
-        with open(source, "r", encoding="utf-8") as f:
+        # with open(source, "r", encoding="utf-8") as f:
+        with pkg_resources.open_text(__package__ + ".data", source) as f:
             for line in f:
                 num, word = line.strip().split(",")
                 data[int(num)] = word

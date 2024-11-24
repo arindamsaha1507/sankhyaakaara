@@ -5,8 +5,8 @@ from enum import Enum
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 
-from languages import LANGUAGES, LanguageEnum
-from converter import Converter, Style
+from sankhyaakaara.languages import LANGUAGES, LanguageEnum
+from sankhyaakaara.converter import Converter, Style
 
 app = FastAPI()
 
