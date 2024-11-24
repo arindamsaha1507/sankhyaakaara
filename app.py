@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 
 import streamlit as st
 import yaml
-from converter import Converter, Style
-from languages import LANGUAGES
+from sankhyaakaara.converter import Converter, Style
+from sankhyaakaara.languages import LANGUAGES
 
 load_dotenv()
 

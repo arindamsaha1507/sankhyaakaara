@@ -3,9 +3,10 @@
 from enum import Enum
 import requests
 from aksharamukha import transliterate
-from components import Components
-from sandhi import Sandhi
-from languages import LANGUAGES
+
+from .components import Components
+from .sandhi import Sandhi
+from .languages import LANGUAGES
 
 
 class Style(Enum):
