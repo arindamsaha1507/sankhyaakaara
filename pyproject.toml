@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sankhyaakaara"
-version = "0.1.0"
+version = "0.1.1"
 description = "A package for Sanskrit numeral processing and sandhi."
 readme = "README.md"
 license = {text = "GPL-3.0"}
