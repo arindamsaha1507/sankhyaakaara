@@ -30,7 +30,7 @@ classifiers = [
 
 dependencies = [
     "akshara>=1.1.0",
-    "akshara-mukha>=0.1.0"
+    "aksharamukha>=0.1.0"
 ]
 
 [project.optional-dependencies]
