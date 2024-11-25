@@ -1,9 +1,5 @@
 """The app module."""
 
-import os
-import logging  # Added for logging
-from logging.handlers import SysLogHandler  # Added for Papertrail logging
-
 from dotenv import load_dotenv
 
 import streamlit as st
@@ -14,17 +10,6 @@ from sankhyaakaara.languages import LANGUAGES
 load_dotenv()
 
 # Initialize logger
-logger = logging.getLogger("PapertrailLogger")  # Added for Papertrail logging
-logger.setLevel(logging.INFO)  # Added for Papertrail logging
-handler = SysLogHandler(
-    # address=("logs5.papertrailapp.com", 29849)
-    address=(os.getenv("PAPERTRAIL_HOST"), int(os.getenv("PAPERTRAIL_PORT")))
-)  # Update to your Papertrail host/port
-formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)  # Added for formatting logs
-handler.setFormatter(formatter)  # Added for Papertrail logging
-logger.addHandler(handler)  # Added for Papertrail logging
 
 
 def base_input(language: str, script: str, max_value: int, numeric: bool = True) -> int:
@@ -89,12 +74,10 @@ def main():
     language = st.sidebar.selectbox(
         "Select Language (भाषां चिनु)", ["English", "Samskritam"]
     )
-    logger.info("Language selected: %s", language)  # Log the language selection
 
     script = st.sidebar.selectbox(
         "Select Script (लिपिं चिनु)", options=LANGUAGES, index=13
     )
-    logger.info("Script selected: %s", script)  # Log the script selection
 
     with st.sidebar:
         st.title(writer("options", language, script))
@@ -114,7 +97,6 @@ def main():
             if converter.change_script(joiner, "Devanagari") in ["अधिक", "adhika"]
             else Style.UTTARA
         )
-        logger.info("Style selected: %s", style)  # Log the style selection
 
         st.text("")
 
@@ -129,24 +111,19 @@ def main():
             max_value = int(1e15)
 
     st.title(writer("title", language, script))
-    logger.info("Main title rendered.")  # Log the main title rendering
 
     st.write(writer("subtitle", language, script))
-    logger.info("Subtitle rendered.")  # Log the subtitle rendering
 
     st.write(f"###### {writer('helper', language, script)} ")
 
     query = base_input(language, script, max_value=max_value, numeric=numeric)
-    logger.info("Input number received: %s", query)  # Log the query input
 
     button = st.button(writer("button", language, script))
 
     if button or st.session_state["flag"]:
         result = converter.get_word(query, script=script, style=style)
         st.write(f"```\n{result}\n```")
-        logger.info("Button clicked. Result: %s", result)  # Log button click and result
 
 
 if __name__ == "__main__":
-    logger.info("Application started.")  # Log application start
     main()
