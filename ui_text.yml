@@ -9,7 +9,15 @@ subtitle:
 bot_link:
   English: Check out the telegram bot here
   Samskritam: "टेलिग्राम्-बृत्यः अत्र दृश्यताम्"
-  
+
+github_link:
+  English: Check out the GitHub repository here
+  Samskritam: "गिटहब्-तन्त्रागारः अत्र दृश्यताम्"
+
+credits:
+  English: Created by Arindam Saha
+  Samskritam: "अरिन्दम-साहा इत्यनेन निर्मितम्"
+
 instruction:
   English: Enter a number
   Samskritam: सङ्ख्यां लिख।
@@ -34,17 +42,17 @@ options:
   English: Options
   Samskritam: विकल्पाः
 
-script:
-  English: Script Options
-  Samskritam: लिप्यन्तराणि
+# script:
+#   English: Script Options
+#   Samskritam: लिप्यन्तराणि
 
 script_options:
   English: Select Script
   Samskritam: लिपिं चिनु।
 
-joiner:
-  English: Joiner Options
-  Samskritam: योजकशब्दाः
+# joiner:
+#   English: Joiner Options
+#   Samskritam: योजकशब्दाः
 
 joiner_uttara:
   English: uttara

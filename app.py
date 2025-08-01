@@ -106,9 +106,39 @@ def main():
             numeric = True
             max_value = int(1e15)
 
-    st.title(writer("title", language, script))
+    # Header section with title and links side by side
+    header_col1, header_col2 = st.columns([2, 1])
 
-    st.write(writer("subtitle", language, script))
+    with header_col1:
+        st.title(writer("title", language, script))
+        st.write(writer("subtitle", language, script))
+
+    with header_col2:
+        st.markdown(
+            "<div style='margin-top: 20px;'></div>", unsafe_allow_html=True
+        )  # Add some top margin
+
+        st.markdown(
+            f"""
+            <div style="text-align: right;">
+                <a href="https://github.com/arindamsaha1507" target="_blank" style="text-decoration: none; display: block; margin-bottom: 8px;">
+                    <span style="font-size: 16px;">👨‍💻</span>
+                    <span style="color: #0366d6; font-weight: 500; margin-left: 5px;">{writer('credits', language, script)}</span>
+                </a>
+                <a href="https://github.com/arindamsaha1507/sankhyaakaara" target="_blank" style="text-decoration: none; display: block; margin-bottom: 8px;">
+                    <span style="font-size: 16px;">⭐</span>
+                    <span style="color: #0366d6; font-weight: 500; margin-left: 5px;">{writer('github_link', language, script)}</span>
+                </a>
+                <a href="https://t.me/sankhyaabot" target="_blank" style="text-decoration: none; display: block; margin-bottom: 12px;">
+                    <span style="font-size: 16px;">🤖</span>
+                    <span style="color: #0366d6; font-weight: 500; margin-left: 5px;">{writer('bot_link', language, script)}</span>
+                </a>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("---")  # Horizontal divider
 
     st.write(f"###### {writer('helper', language, script)} ")
 
