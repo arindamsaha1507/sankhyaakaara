@@ -6,6 +6,10 @@ subtitle:
   English: A tool for converting numbers to Sanskrit words
   Samskritam: "॥ सङ्ख्याशब्दपरिवर्तकोऽयम् ॥"
 
+bot_link:
+  English: Check out the telegram bot here
+  Samskritam: "टेलिग्राम्-बृत्यः अत्र दृश्यताम्"
+  
 instruction:
   English: Enter a number
   Samskritam: सङ्ख्यां लिख।
