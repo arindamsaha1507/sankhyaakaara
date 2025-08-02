@@ -106,21 +106,32 @@ def main():
             numeric = True
             max_value = int(1e15)
 
-    # Header section with title and links side by side
-    header_col1, header_col2 = st.columns([4, 1])
+    st.title(writer("title", language, script))
+    st.write(writer("subtitle", language, script))
 
-    with header_col1:
-        st.title(writer("title", language, script))
-        st.write(writer("subtitle", language, script))
+    st.markdown("---")  # Horizontal divider
 
-    with header_col2:
+    st.write(f"###### {writer('helper', language, script)} ")
+
+    query = base_input(language, script, max_value=max_value, numeric=numeric)
+
+    button = st.button(writer("button", language, script))
+
+    if button or st.session_state["flag"]:
+        result = converter.get_word(query, script=script, style=style)
+        st.write(f"```\n{result}\n```")
+
+    st.markdown("---")  # Horizontal divider
+
+    with st.expander(writer("about", language, script), expanded=False):
+
         st.markdown(
             "<div style='margin-top: 20px;'></div>", unsafe_allow_html=True
         )  # Add some top margin
 
         st.markdown(
             f"""
-            <div style="text-align: right;">
+            <div>
                 <a href="https://github.com/arindamsaha1507" target="_blank" style="text-decoration: none; display: block; margin-bottom: 8px;">
                     <span style="font-size: 16px;">👨‍💻</span>
                     <span style="color: #0366d6; font-weight: 500; margin-left: 5px;">{writer('credits', language, script)}</span>
@@ -137,18 +148,6 @@ def main():
             """,
             unsafe_allow_html=True,
         )
-
-    st.markdown("---")  # Horizontal divider
-
-    st.write(f"###### {writer('helper', language, script)} ")
-
-    query = base_input(language, script, max_value=max_value, numeric=numeric)
-
-    button = st.button(writer("button", language, script))
-
-    if button or st.session_state["flag"]:
-        result = converter.get_word(query, script=script, style=style)
-        st.write(f"```\n{result}\n```")
 
 
 if __name__ == "__main__":
