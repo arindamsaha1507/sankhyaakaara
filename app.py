@@ -107,7 +107,7 @@ def main():
             max_value = int(1e15)
 
     # Header section with title and links side by side
-    header_col1, header_col2 = st.columns([2, 1])
+    header_col1, header_col2 = st.columns([4, 1])
 
     with header_col1:
         st.title(writer("title", language, script))
