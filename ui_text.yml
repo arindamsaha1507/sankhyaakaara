@@ -7,12 +7,12 @@ subtitle:
   Samskritam: "॥ सङ्ख्याशब्दपरिवर्तकोऽयम् ॥"
 
 bot_link:
-  English: Check out the telegram bot here
-  Samskritam: "टेलिग्राम्-बृत्यः अत्र दृश्यताम्"
+  English: Telegram Bot
+  Samskritam: "टेलिग्राम्-भृत्यः"
 
 github_link:
-  English: Check out the GitHub repository here
-  Samskritam: "गिटहब्-तन्त्रागारः अत्र दृश्यताम्"
+  English: GitHub repository
+  Samskritam: "गिटहब्-तन्त्रागारः"
 
 credits:
   English: Created by Arindam Saha
@@ -42,17 +42,9 @@ options:
   English: Options
   Samskritam: विकल्पाः
 
-# script:
-#   English: Script Options
-#   Samskritam: लिप्यन्तराणि
-
 script_options:
   English: Select Script
   Samskritam: लिपिं चिनु।
-
-# joiner:
-#   English: Joiner Options
-#   Samskritam: योजकशब्दाः
 
 joiner_uttara:
   English: uttara
